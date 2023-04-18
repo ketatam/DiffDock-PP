@@ -1,0 +1,45 @@
+---
+ # file is parsed by inner-most keys only
+ data:
+     dataset: dips
+     data_file: /data/rsg/nlp/sdobers/data/DIPS/batchwise_loading/data_file.csv #data/dips.csv
+     data_path: /data/rsg/nlp/sdobers/data/DIPS/pairs_pruned #/data/rsg/chemistry/rmwu/data/raw/binding/dips/pairs-pruned
+     resolution: residue
+     no_graph_cache: True
+     knn_size: 20 # was 20
+     use_orientation_features: False # default is False
+     multiplicity: 1
+ model:
+     model_type: e3nn
+     no_torsion: True
+     no_batch_norm: True
+     lm_embed_dim: 1280
+     dropout: 0.0
+     dynamic_max_cross: True # try True, default False
+     cross_cutoff_weight: 3
+     cross_cutoff_bias: 40
+     cross_max_dist: 80
+     num_conv_layers: 4 # was 4, in diffdock 6, default 2
+     ns: 32 # was 16. in diffdock 48, default 16
+     nv: 6 # was 4. in diffdock 10, default 4
+     dist_embed_dim: 32
+     cross_dist_embed_dim: 32
+     sigma_embed_dim: 32
+     max_radius: 30. # default is 5.
+ train:
+     patience: 2000
+     epochs: 2000
+     lr: 1.e-3
+     weight_decay: 0.
+     tr_weight: 0.5
+     rot_weight: 0.5
+     tor_weight: 0.
+     val_inference_freq: 10
+     num_steps: 40
+ diffusion:
+     tr_s_min: 0.01
+     tr_s_max: 30.0
+     rot_s_min: 0.01
+     rot_s_max: 1.65
+     sample_train: True
+     num_inference_complexes_train_data: 1200

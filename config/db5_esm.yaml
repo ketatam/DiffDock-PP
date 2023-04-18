@@ -1,0 +1,37 @@
+---
+ # file is parsed by inner-most keys only
+ data:
+     dataset: db5
+     data_file: datasets/DB5/splits.csv
+     data_path: datasets/DB5
+     resolution: residue
+     multiplicity: 1
+ model:
+     model_type: e3nn
+     no_torsion: True
+     no_batch_norm: True
+     lm_embed_dim: 1280
+     dropout: 0.0
+     dynamic_max_cross: True
+     cross_cutoff_weight: 3
+     cross_cutoff_bias: 40
+     num_conv_layers: 4
+     ns: 32
+     nv: 6
+     max_radius: 30.
+ train:
+     lr: 1.e-4
+     patience: 200
+     epochs: 2000
+     weight_decay: 0.
+     tr_weight: 0.5
+     rot_weight: 0.5
+     tor_weight: 0.
+     val_inference_freq: 5
+     num_steps: 40
+ diffusion:
+     tr_s_min: 0.01
+     tr_s_max: 30.0
+     rot_s_min: 0.01
+     rot_s_max: 1.65
+     sample_train: True

@@ -1,0 +1,12 @@
+---
+ # file is parsed by inner-most keys only
+ data:
+     dataset: db5
+     data_file: data/db5.csv
+     data_path: /data/rsg/chemistry/rmwu/data/raw/binding/db5
+ model:
+     model_type: e3nn
+     no_torsion: True
+     no_batch_norm: True
+ train:
+     lr: 1.e-4

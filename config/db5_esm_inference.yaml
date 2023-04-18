@@ -1,0 +1,56 @@
+---
+ # file is parsed by inner-most keys only
+ data:
+     dataset: db5
+     data_file: datasets/DB5/splits_test.csv
+     data_path: datasets/DB5
+     resolution: residue
+     no_graph_cache: True
+     knn_size: 20
+     use_orientation_features: False
+     multiplicity: 1
+     use_unbound: False
+ model:
+     model_type: e3nn
+     no_torsion: True
+     no_batch_norm: True
+     lm_embed_dim: 1280
+     dropout: 0.0
+     dynamic_max_cross: True
+     cross_cutoff_weight: 3
+     cross_cutoff_bias: 40
+     cross_max_dist: 80
+     num_conv_layers: 4
+     ns: 16
+     nv: 4
+     dist_embed_dim: 32
+     cross_dist_embed_dim: 32
+     sigma_embed_dim: 32
+     max_radius: 5.
+ train:
+     patience: 2000
+     epochs: 2000
+     lr: 1.e-3
+     weight_decay: 0.
+     tr_weight: 0.5
+     rot_weight: 0.5
+     tor_weight: 0.
+     val_inference_freq: 10
+     num_steps: 40
+     actual_steps: 40
+ diffusion:
+     tr_s_min: 0.01
+     tr_s_max: 30.0
+     rot_s_min: 0.01
+     rot_s_max: 1.65
+     sample_train: True
+     num_inference_complexes_train_data: 1200
+ inference:
+     mirror_ligand: False
+     run_inference_without_confidence_model: True
+     wandb_sweep: False
+     no_final_noise: True
+    #  temp_sampling: 5.33 # default 1.0. Set this to 1.0 to deactivate low temp sampling
+    #  temp_psi: 1.05 # default 0.0
+    #  temp_sigma_data_tr: 0.40 # default 0.5
+    #  temp_sigma_data_rot:  0.64 # default 0.5

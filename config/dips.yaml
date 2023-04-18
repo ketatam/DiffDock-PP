@@ -1,0 +1,17 @@
+---
+ # file is parsed by inner-most keys only
+ data:
+     dataset: dips
+     data_file: datasets/DIPS/data_file.csv
+     data_path: datasets/DIPS/pairs_pruned
+     resolution: residue
+ model:
+     model_type: e3nn
+     no_torsion: True
+     no_batch_norm: True
+ train:
+     patience: 20
+     epochs: 200
+     lr: 1.e-4
+     weight_decay: 0.
+     num_conv_layers: 2

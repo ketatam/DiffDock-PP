@@ -1,0 +1,81 @@
+---
+ # file is parsed by inner-most keys only
+ data:
+     dataset: dips
+     data_file: datasets/DIPS/data_file_100_test.csv
+     data_path: datasets/DIPS/pairs_pruned
+     resolution: residue
+     no_graph_cache: True
+     knn_size: 20
+     use_orientation_features: False
+     multiplicity: 1
+ model:
+     model_type: e3nn
+     no_torsion: True
+     no_batch_norm: True
+     lm_embed_dim: 1280
+     dropout: 0.0
+     dynamic_max_cross: True
+     cross_cutoff_weight: 3
+     cross_cutoff_bias: 40
+     cross_max_dist: 80
+     num_conv_layers: 4
+     ns: 16
+     nv: 4
+     dist_embed_dim: 32
+     cross_dist_embed_dim: 32
+     sigma_embed_dim: 32
+     max_radius: 5.
+ train:
+     patience: 50
+     epochs: 2000
+     lr: 1.e-3
+     weight_decay: 0.
+     tr_weight: 0.5
+     rot_weight: 0.5
+     tor_weight: 0.
+     val_inference_freq: 10
+     num_steps: 40
+ diffusion:
+     tr_s_min: 0.01
+     tr_s_max: 30.0
+     rot_s_min: 0.01
+     rot_s_max: 1.65
+     sample_train: True
+     num_inference_complexes_train_data: 1200
+ inference:
+     mirror_ligand: False
+     run_inference_without_confidence_model: False
+     wandb_sweep: False
+     no_final_noise: True
+     actual_steps: 40
+     # optimized for without conf_model
+     temp_sampling: 2.439 # default 1.0. Set this to 1.0 to deactivate low temp sampling
+     temp_psi: 0.216 # default 0.0
+     temp_sigma_data_tr: 0.593 # default 0.5
+     temp_sigma_data_rot:  0.228 # default 0.5
+
+    #  # optimized for irmsd conf_model
+    #  temp_sampling: 1.818 # default 1.0. Set this to 1.0 to deactivate low temp sampling
+    #  temp_psi: 2.758 # default 0.0
+    #  temp_sigma_data_tr: 0.054 # default 0.5
+    #  temp_sigma_data_rot:  0.626 # default 0.5
+    
+    #  # optimized for lrmsd conf_model
+    #  temp_sampling: 2.188 # default 1.0. Set this to 1.0 to deactivate low temp sampling
+    #  temp_psi: 1.893 # default 0.0
+    #  temp_sigma_data_tr: 0.297 # default 0.5
+    #  temp_sigma_data_rot:  0.177 # default 0.5
+    #
+    #
+    #  # old config (the one in the paper)
+    #  temp_sampling: 1.654 # default 1.0. Set this to 1.0 to deactivate low temp sampling
+    #  temp_psi: 0.633  # default 0.0
+    #  temp_sigma_data_tr: 0.616  # default 0.5
+    #  temp_sigma_data_rot: 0.276   # default 0.5
+    #
+    #  # no low-temp sampling
+    #  temp_sampling: 1.0 # default 1.0. Set this to 1.0 to deactivate low temp sampling
+    #  temp_psi: 0.633  # default 0.0
+    #  temp_sigma_data_tr: 0.616  # default 0.5
+    #  temp_sigma_data_rot: 0.276   # default 0.5

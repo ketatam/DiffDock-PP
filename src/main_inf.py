@@ -159,7 +159,8 @@ def main(args=None):
                 })
 
             def try_params_with_confidence_model():
-                wandb.login(key='36224bfda68d55fb01cd0404cb2b1186b6fd6d81', relogin=True)
+                wandb_key = "INSERT_YOUR_WANDB_KEY"
+                wandb.login(key=wandb_key, relogin=True)
                 run = wandb.init()
                 args.temp_sampling = wandb.config.temp_sampling
                 args.temp_psi = wandb.config.temp_psi
@@ -200,7 +201,8 @@ def main(args=None):
                 })
 
             def try_actual_steps_with_confidence_model():
-                wandb.login(key='36224bfda68d55fb01cd0404cb2b1186b6fd6d81', relogin=True)
+                wandb_key = "INSERT_YOUR_WANDB_KEY"
+                wandb.login(key=wandb_key, relogin=True)
                 run = wandb.init()
                 args.actual_steps = wandb.config.actual_steps
 
@@ -325,13 +327,14 @@ def main(args=None):
         # data_list.data = loaders["test"].data#[i] for i in range(len(loaders["test"].data))]
         # data_list.length = len(loaders["test"].data)
 
+        # MAIN RUN
         # run reverse diffusion process
         print(f'args.temp_sampling: {args.temp_sampling}')
         
         loaders,results = generate_loaders(loaders["test"],args) #TODO adapt sample size
         
         for i,loader in tqdm(enumerate(loaders), total=len(loaders)):
-            samples_list = sample(loader, model, args) #TODO: should work on data loader
+            samples_list = sample(loader, model, args, visualize_first_n_samples=args.visualize_n_val_graphs) #TODO: should work on data loader
             samples_loader = DataLoader(samples_list,batch_size=args.batch_size)
             pred_list = evaluate_confidence(model_confidence,samples_loader,args) # TODO -> maybe list inside
             results[i]= results[i]+sorted(list(zip(samples_list,pred_list)),key=lambda x:-x[1]) 

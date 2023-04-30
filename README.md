@@ -84,10 +84,10 @@ sh src/inference.sh
 ```
 Similarly to training, you can specify all necessary configurations in the bash file and in the config files. The default configuration with the provided trained score and confidence models allows you to reproduce the numbers in the paper.
 
-Note that if you want to test our models on your custom dataset, the easiest way would be to use the `DB5Loader` class defined in `src/data/data_train_utils.py` and name you PDB files `{PDB_ID}_l_b.pdb` and `{PDB_ID}_l_b.pdb` for the ligand and the receptor, respectively.
+Note that if you want to test our models on your custom dataset, the easiest way would be to use the `DB5Loader` class defined in `src/data/data_train_utils.py` and name your PDB files `{PDB_ID}_l_b.pdb` and `{PDB_ID}_r_b.pdb` for the ligand and the receptor, respectively. For illustration, check out the script `src/db5_inference.sh` and the corresponding config file `config/single_pair_inference.yaml`, which run the inference on a single pair located in `datasets/single_pair_dataset`.
 
 ### Visualization
-To visualize the predictions of the model, in the `inference.sh` script add the flag `--visualization_path path/to/visualization/folder` and it will save the protein complex structure at each time step of the reverse diffusion process as `.pdb` files that you can visualize using, e.g., [PyMOL](https://pymol.org/2/).
+To visualize the predictions of the model, in the `inference.sh` script add the flag `--visualization_path path/to/visualization/folder` and `--visualize_n_val_graphs NUMBER_OF_COMPLEXES_TO_VISUALIZE` and it will save the protein complex structure at each time step of the reverse diffusion process as `.pdb` files that you can visualize using, e.g., [PyMOL](https://pymol.org/2/).
 
 # Citation
 ```

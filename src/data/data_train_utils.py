@@ -382,7 +382,9 @@ class Loader:
         all_reps = []
         for batch in tqdm(batches, desc="ESM", ncols=50):
             reps = self.esm_model(batch.cuda(), repr_layers=[33])
-            reps = reps["representations"][33].cpu().squeeze()[:,1:]
+            #reps = reps["representations"][33].cpu().squeeze()[:,1:]
+            # remove squeeze() to allow for running on a single pair.
+            reps = reps["representations"][33].cpu()[:,1:]
             all_reps.append(reps)
         # crop to length
         # exclude <cls> <sep>
